@@ -1,6 +1,6 @@
 "use client";
 import assets from "@/assets";
-import Login from "@/page/login/Login";
+import Login from "@/page/AddUser/AddUser";
 import { MyAvatar } from "@/components/shadcn/MyAvatar";
 import MyDialog from "@/components/shadcn/MyDialog";
 

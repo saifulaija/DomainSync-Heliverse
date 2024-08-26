@@ -40,7 +40,6 @@ export type TUser = {
 };
 
 export const categoryOptions = [
-  
   { label: "Man", value: "man" },
   { label: "Women", value: "women" },
   { label: "Kid", value: "kid" },
@@ -64,7 +63,6 @@ export const subCategoryFilterOptions = [
   { label: "kid-Sport", value: "kid-sport" },
 ];
 export const subCategoryOptions = [
- 
   { label: "Man-Causal", value: "man-causal" },
   { label: "Man-Formal", value: "man-formal" },
   { label: "Man-Sport", value: "man-sport" },
@@ -81,9 +79,8 @@ export const sortOptions = [
 ];
 export const sizeOptions = [
   { label: "34", value: "sizeStok.size" },
-  { label: "38",  value: "sizeStok.size" },
+  { label: "38", value: "sizeStok.size" },
 ];
-
 
 export const roleColors = {
   superAdmin: "geekblue",
@@ -96,30 +93,22 @@ export const deliveryColors = {
   completed: "green",
 };
 
+export type TOrder = {
+  name: string;
+  orderNumber: string;
+};
 
-export type TOrder= {
- name:string;
- orderNumber:string
-}
-
-
-
-
-export type TReview= {
-
+export type TReview = {
   name: string;
   productId: string;
   description: string;
   rating: number;
- 
-}
-export type T= {
-
+};
+export type T = {
   name: string;
   productId: string;
   description: string;
   rating: number;
- 
-}
+};
 
-
+export const GenderOption = ["Male", "Female"];

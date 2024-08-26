@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
-import LoginForm from "./LoginForm";
+
 import assets from "@/assets";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import AddUserForm from "@/form/AddUserForm";
 
 export default function Login() {
   return (
@@ -14,10 +15,10 @@ export default function Login() {
       >
         <div className="w-full space-y-10 overflow-y-auto p-10 md:w-1/2">
           <h1 className="text-center text-3xl font-bold">
-            Login to Domain<span className="text-primary">S</span>ync
+            Add User to Domain<span className="text-primary">S</span>ync
           </h1>
           <div className="space-y-5">
-            <LoginForm />
+            <AddUserForm />
             <Link to="/signup" className="block text-center hover:underline">
               Don&apos;t have an account? Sign up
             </Link>
