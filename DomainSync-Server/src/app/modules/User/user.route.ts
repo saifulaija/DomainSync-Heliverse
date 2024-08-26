@@ -18,12 +18,9 @@ router.post(
 
 router.get('/', UserControllers.getAllUser)
 router.get(
-  '/me',
-  auth(
-    USER_ROLE.user,
-   
-  ),
-  UserControllers.getMe,
+  '/:id',
+ 
+  UserControllers.getSingleUser,
 );
 
 export const UserRoutes = router;

@@ -36,24 +36,17 @@ const getAllUser = async (query: Record<string, unknown>) => {
   };
 };
 
-const getMe = async (userId: string, role: string) => {
-  let result = null;
-  if (role === 'user') {
-    result = await User.findOne({ _id: userId });
-  }
-  // if (role === 'admin') {
-  //   result = await User.findOne({ id: userId });
-  // }
+const getSingleUser=async(id:string)=>{
+  console.log(id);
 
-  // if (role === 'superAdmin') {
-  //   result = await User.findOne({ id: userId });
-  // }
-
-  return result;
-};
+  const result=await User.findById(id)
+  return result
+  
+}
 
 export const UserServices = {
   createUserIntoDB,
   getAllUser,
-  getMe,
+  getSingleUser
+ 
 };

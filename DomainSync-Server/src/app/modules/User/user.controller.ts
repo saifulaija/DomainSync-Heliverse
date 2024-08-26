@@ -19,7 +19,7 @@ const getAllUser = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'user is fetched successfully',
+    message: 'users is fetched successfully',
     data: result,
   });
 });
@@ -28,9 +28,9 @@ const getAllUser = catchAsync(async (req, res) => {
 
 
 
-const getMe = catchAsync(async (req, res) => {
-  const { userId, role } = req.user;
-  const result = await UserServices.getMe(userId, role);
+const getSingleUser = catchAsync(async (req, res) => {
+ const id=req.params.id as string
+  const result = await UserServices.getSingleUser(id);
   console.log(result);
 
   sendResponse(res, {
@@ -44,5 +44,6 @@ const getMe = catchAsync(async (req, res) => {
 export const UserControllers = {
   createUser,
   getAllUser,
-  getMe,
+  getSingleUser
+  
 };
