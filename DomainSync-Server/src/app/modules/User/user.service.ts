@@ -43,10 +43,25 @@ const getSingleUser=async(id:string)=>{
   return result
   
 }
+const deleteUser=async(id:string)=>{
+
+    const isExistUser = await User.findOne({ _id: id });
+    
+
+    if (!isExistUser) {
+      throw new AppError(httpStatus.BAD_REQUEST, 'This user not found !');
+    }
+  console.log(id);
+
+  const result=await User.findByIdAndDelete(id)
+  return result
+  
+}
 
 export const UserServices = {
   createUserIntoDB,
   getAllUser,
-  getSingleUser
+  getSingleUser,
+  deleteUser
  
 };
