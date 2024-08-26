@@ -4,10 +4,12 @@ import { Model } from 'mongoose';
 import { USER_ROLE } from './user.constant';
 
 export interface TUser {
-  name?: string;
+  name: string;
   email: string;
-  password: string;
-  role?: string;
+  gender: "Male" | "Female";
+  domain:string;
+  availability:boolean;
+  avatar?:string;
   isDeleted?: boolean;
 }
 
