@@ -21,5 +21,10 @@ router.delete(
 
   UserControllers.deleteUser,
 );
+router.put(
+  '/:id',
+
+  UserControllers.updateUser,
+);
 
 export const UserRoutes = router;

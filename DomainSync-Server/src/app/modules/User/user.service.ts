@@ -1,3 +1,4 @@
+import { reviewValidations } from './../review/review.validation';
 /* eslint-disable no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import httpStatus from 'http-status';
@@ -36,32 +37,40 @@ const getAllUser = async (query: Record<string, unknown>) => {
   };
 };
 
-const getSingleUser=async(id:string)=>{
-  console.log(id);
+const getSingleUser = async (id: string) => {
+  const result = await User.findById(id);
+  return result;
+};
+const deleteUser = async (id: string) => {
+  const isExistUser = await User.findOne({ _id: id });
 
-  const result=await User.findById(id)
+  if (!isExistUser) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'This user not found !');
+  }
+
+  const result = await User.findByIdAndDelete(id);
+  return result;
+};
+
+const updateUser = async (id: string, payload: Partial<TUser>) => {
+  const isExistUser = await User.findOne({ _id: id });
+
+  if (!isExistUser) {
+    throw new AppError(httpStatus.BAD_REQUEST, 'This user not found !');
+  }
+
+  const result = await User.findByIdAndUpdate(id, payload, {
+    new: true,
+    runValidators: true,
+  });
+
   return result
-  
-}
-const deleteUser=async(id:string)=>{
-
-    const isExistUser = await User.findOne({ _id: id });
-    
-
-    if (!isExistUser) {
-      throw new AppError(httpStatus.BAD_REQUEST, 'This user not found !');
-    }
-  console.log(id);
-
-  const result=await User.findByIdAndDelete(id)
-  return result
-  
-}
+};
 
 export const UserServices = {
   createUserIntoDB,
   getAllUser,
   getSingleUser,
-  deleteUser
- 
+  deleteUser,
+  updateUser
 };
