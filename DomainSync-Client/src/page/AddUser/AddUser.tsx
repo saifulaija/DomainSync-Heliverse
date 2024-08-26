@@ -13,15 +13,13 @@ export default function Login() {
           "flex h-full max-h-[40rem] w-full max-w-[64rem] overflow-hidden"
         )}
       >
-        <div className="w-full space-y-10 overflow-y-auto p-10 md:w-1/2">
+        <div className="w-full space-y-10  p-10 md:w-1/2">
           <h1 className="text-center text-3xl font-bold">
             Add User to Domain<span className="text-primary">S</span>ync
           </h1>
           <div className="space-y-5">
             <AddUserForm />
-            <Link to="/signup" className="block text-center hover:underline">
-              Don&apos;t have an account? Sign up
-            </Link>
+            
           </div>
         </div>
         <img
