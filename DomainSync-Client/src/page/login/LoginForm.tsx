@@ -8,9 +8,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
 
-
-
-import LoadingButton from "../shared/LoadingButton/LoadingButton";
+import LoadingButton from "../../components/shared/LoadingButton/LoadingButton";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 
 const LoginSchema = z.object({
@@ -23,9 +21,7 @@ const LoginSchema = z.object({
 type FormFields = z.infer<typeof LoginSchema>;
 
 const LoginForm = () => {
-
-      const [login, { isLoading }] = useLoginMutation();
-  
+  const [login, { isLoading }] = useLoginMutation();
 
   const [error, setError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -44,8 +40,6 @@ const LoginForm = () => {
   });
 
   const onSubmit = async (values: FieldValues) => {
-
-
     try {
       const res = await login(values);
       console.log(res);
@@ -53,7 +47,6 @@ const LoginForm = () => {
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res?.data?.accessToken });
         toast("User login successfully");
-      
       } else {
         setError(res?.message || "An unexpected error occurred.");
       }

@@ -2,12 +2,6 @@ import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import assets from "@/assets";
 
-
-
-
-
-
-
 export default function Login() {
   return (
     <main className="flex  items-center justify-center p-5 mx-auto">
