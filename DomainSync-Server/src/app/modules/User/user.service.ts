@@ -5,6 +5,8 @@ import httpStatus from 'http-status';
 import { TUser } from './user.interface';
 import { User } from './user.model';
 import AppError from '../../errors/AppError';
+import { userSearchableFields } from './user.constant';
+import QueryBuilder from '../../builder/QueryBuilder';
 
 const createUserIntoDB = async (payload: TUser) => {
   const isExistUser = await User.findOne({ email: payload.email });
@@ -17,17 +19,27 @@ const createUserIntoDB = async (payload: TUser) => {
   return result;
 };
 
+const getAllUser = async (query: Record<string, unknown>) => {
+  const userQuery = new QueryBuilder(User.find({ isDeleted: false }), query)
+    .search(userSearchableFields)
+    .filter()
+    .sort()
+    .paginate()
+    .fields();
 
-const getAllUser = async()=>{
-  const result  =  await User.find()
-  return result;
-}
+  const result = await userQuery.modelQuery;
+  const meta = await userQuery.countTotal();
+
+  return {
+    meta,
+    result,
+  };
+};
 
 const getMe = async (userId: string, role: string) => {
-
   let result = null;
   if (role === 'user') {
-    result = await User.findOne({_id:userId});
+    result = await User.findOne({ _id: userId });
   }
   // if (role === 'admin') {
   //   result = await User.findOne({ id: userId });
