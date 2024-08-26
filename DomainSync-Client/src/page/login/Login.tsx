@@ -1,14 +1,20 @@
 import { Link } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import assets from "@/assets";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 export default function Login() {
   return (
-    <main className="flex  items-center justify-center p-5 mx-auto">
-      <div className="flex h-full max-h-[40rem] w-full max-w-[64rem] overflow-hidden rounded-2xl bg-card shadow-2xl">
+    <main className="flex  items-center justify-center p-2 mx-auto">
+      <Card
+        className={cn(
+          "flex h-full max-h-[40rem] w-full max-w-[64rem] overflow-hidden"
+        )}
+      >
         <div className="w-full space-y-10 overflow-y-auto p-10 md:w-1/2">
           <h1 className="text-center text-3xl font-bold">
-            Login to Medi<span className="text-blue-600">M</span>art
+            Login to Domain<span className="text-primary">S</span>ync
           </h1>
           <div className="space-y-5">
             <LoginForm />
@@ -22,7 +28,7 @@ export default function Login() {
           alt="login"
           className="hidden w-1/2 object-cover md:block object-center"
         />
-      </div>
+      </Card>
     </main>
   );
 }

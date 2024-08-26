@@ -3,13 +3,14 @@ import Header from "../shared/Header/Header";
 
 
 const HomeLayout = () => {
-  return <div>
-
-    <Header/>
+  return (
     <div>
-      <Outlet/>
+      <Header />
+      <div className="mt-16">
+        <Outlet />
+      </div>
     </div>
-  </div>;
+  );
 };
 
 export default HomeLayout;
