@@ -9,7 +9,7 @@ import { USER_ROLE } from './user.constant';
 const router = express.Router();
 
 router.post(
-  '/create-user',
+  '/',
 
   // validateRequest(UserValidation.createUserValidationSchema),
 
