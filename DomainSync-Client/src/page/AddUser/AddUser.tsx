@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import AddUserForm from "@/form/AddUserForm";
 
-export default function Login() {
+export default function AddUser() {
   return (
     <main className="flex  items-center justify-center p-2 mx-auto">
       <Card

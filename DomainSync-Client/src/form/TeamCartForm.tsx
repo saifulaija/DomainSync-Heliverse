@@ -54,6 +54,9 @@ const TeamCartForm = ({ users }:{users:IUser[]}) => {
     try {
       const res = await createTeam(teamData).unwrap(); 
 
+      console.log(res);
+      
+
       if (res?.data) {
         toast.success("Team created successfully");
         navigate(`/show-team/${res.data._id}`);

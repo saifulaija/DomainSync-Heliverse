@@ -326,11 +326,11 @@ const Header = () => {
             <Link to='/user-team-cart' className="relative flex items-center">
               <Button
                 // onClick={handleAddToTeam}
-                variant="outline"
+                // variant="outline"
                 className="flex items-center space-x-1"
               >
                 <UserPlus className="w-4 h-4" />
-                <span>Selected Users</span>
+                {/* <span>Selected Users</span> */}
               </Button>
               <Badge
                 variant="destructive"
