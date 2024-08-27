@@ -1,4 +1,3 @@
-
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,13 +26,12 @@ const formSchema = z.object({
 });
 
 // TeamCartForm component definition
-const TeamCartForm = ({ users }:{users:IUser[]}) => {
-
-    const dispatch=useAppDispatch()
+const TeamCartForm = ({ users }: { users: IUser[] }) => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-    const handleClearCart = () => {
-      dispatch(clearCart());
-    };
+  const handleClearCart = () => {
+    dispatch(clearCart());
+  };
   const [createTeam, { isLoading }] = useCreateTeamMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -43,27 +41,29 @@ const TeamCartForm = ({ users }:{users:IUser[]}) => {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // Prepare the data to send to the backend, including the users array
     const teamData = {
       ...values,
-      users: users.map((user:IUser) => ({
-        userId: user._id, 
+      users: users.map((user: IUser) => ({
+        userId: user._id,
       })),
     };
 
     try {
-      const res = await createTeam(teamData).unwrap(); 
-
-      console.log(res);
-      
+      const res = await createTeam(teamData).unwrap();
 
       if (res?.data) {
-        toast.success("Team created successfully");
+        toast.success("Team created successfully", { position: "bottom-left" });
         navigate(`/show-team/${res.data._id}`);
-        handleClearCart()
+        handleClearCart();
       }
     } catch (err: any) {
-      toast.error(err?.message);
+      if (err?.data?.message) {
+        toast.error(err.data.message, { position: "bottom-left" });
+      } else {
+        toast.error("An unexpected error occurred. Please try again.", {
+          position: "bottom-left",
+        });
+      }
     }
   };
 
