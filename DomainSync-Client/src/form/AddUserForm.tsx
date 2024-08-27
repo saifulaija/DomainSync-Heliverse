@@ -26,7 +26,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { GenderOption } from "@/types/global.type";
+import { DomainOption, GenderOption } from "@/types/global.type";
 import { useNavigate } from "react-router-dom";
 import { useCreateUserMutation } from "@/redux/features/user/userApi";
 const formSchema = z.object({
@@ -152,17 +152,27 @@ const AddUserForm = () => {
                 <FormItem>
                   <FormLabel>Domain</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Enter  domain......"
-                      {...field}
-                    />
+                    <Select onValueChange={field.onChange} value={field.value}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="Select a domain" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectLabel>Domain</SelectLabel>
+                          {DomainOption.map((domain) => (
+                            <SelectItem key={domain} value={domain}>
+                              {domain}
+                            </SelectItem>
+                          ))}
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
+     
 
             <FormField
               control={form.control}

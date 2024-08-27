@@ -112,3 +112,12 @@ export type T = {
 };
 
 export const GenderOption = ["Male", "Female"];
+export const DomainOption = [
+  "Sales",
+  "Marketing",
+  "UI Designing",
+  "Business Development",
+  "Management",
+  "IT",
+  "Finance"
+];

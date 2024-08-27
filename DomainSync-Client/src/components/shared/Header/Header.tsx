@@ -168,10 +168,16 @@ import { Link, NavLink } from "react-router-dom";
 import AuthDropdown from "./AuthButton/AuthButton";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
+import { UserPlus, Users } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { useAppSelector } from "@/redux/hokks";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+    const user = useAppSelector((state) => state.user);
+    console.log(user);
+    
 
   useEffect(() => {
     const handleScroll = () => {
@@ -312,14 +318,30 @@ const Header = () => {
               placeholder="Search users..."
               value={searchValue}
               onChange={handleSearchChange}
-              className={cn(
-                "focus:border-none",
-              
-              )}
+              className={cn("focus:border-none")}
             />
           </form>
 
           <div className="flex items-center gap-2">
+            <Link to='/user-team-cart' className="relative flex items-center">
+              <Button
+                // onClick={handleAddToTeam}
+                variant="outline"
+                className="flex items-center space-x-1"
+              >
+                <UserPlus className="w-4 h-4" />
+                <span>Selected Users</span>
+              </Button>
+              <Badge
+                variant="destructive"
+                className={cn(
+                  "absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2"
+                )}
+              >
+                {user.cartItems.length ? user?.cartItems.length : 0}
+              </Badge>
+            </Link>
+
             <AuthDropdown />
           </div>
         </header>
