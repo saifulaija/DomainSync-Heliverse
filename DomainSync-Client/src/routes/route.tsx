@@ -1,7 +1,8 @@
-import Home from "@/components/dadhboard/home/Home";
+
 import HomeLayout from "@/components/layout/HomeLayout";
 import NotFound from "@/components/shared/NotFound/NotFound";
 import Login from "@/page/AddUser/AddUser";
+import Home from "@/page/Home/Home";
 
 import { createBrowserRouter } from "react-router-dom";
 

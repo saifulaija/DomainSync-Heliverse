@@ -24,7 +24,7 @@ const userApi = baseApi.injectEndpoints({
 
         if (args) {
           args.forEach((item: TQueryParam) => {
-            params.append(item.name, item.value as string);
+            params.append(item?.name, item?.value as string);
           });
         }
 
