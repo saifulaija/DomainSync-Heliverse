@@ -47,12 +47,12 @@ const TeamCartForm = ({ users }:{users:IUser[]}) => {
     const teamData = {
       ...values,
       users: users.map((user:IUser) => ({
-        userId: user._id, // Include the user ID for each selected user
+        userId: user._id, 
       })),
     };
 
     try {
-      const res = await createTeam(teamData).unwrap(); // Send the data to the backend
+      const res = await createTeam(teamData).unwrap(); 
 
       if (res?.data) {
         toast.success("Team created successfully");

@@ -322,7 +322,7 @@ const Header = () => {
             />
           </form>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-8">
             <Link to='/user-team-cart' className="relative flex items-center">
               <Button
                 // onClick={handleAddToTeam}

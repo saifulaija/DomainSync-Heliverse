@@ -1,5 +1,4 @@
-// import { useAppSelector, useAppDispatch } from "@/redux/hokks";
-// import { removeFromCart } from "@/redux/features/user/userSlice";
+// import { removeFromCart, clearCart } from "@/redux/features/user/userSlice";
 // import {
 //   Table,
 //   TableBody,
@@ -10,8 +9,9 @@
 //   TableRow,
 // } from "@/components/ui/table";
 // import { Button } from "@/components/ui/button";
-// import { Trash } from "lucide-react";
+// import { Trash, XCircle } from "lucide-react";
 // import TeamCartForm from "@/form/TeamCartForm";
+// import { useAppDispatch, useAppSelector } from "@/redux/hokks";
 
 // const TeamCart = () => {
 //   const user = useAppSelector((state) => state.user);
@@ -21,12 +21,16 @@
 //     dispatch(removeFromCart({ _id: id }));
 //   };
 
+//   const handleClearCart = () => {
+//     dispatch(clearCart());
+//   };
+
 //   return (
-//     <div className="w-full">
+//     <div className="w-full p-20">
 //       <div className="container mx-auto">
-//         <div className="md:flex items-center gap-3">
-//           <div className="w-full">
-//             <Table>
+//         <div className="flex flex-col md:flex-row items-center gap-6">
+//           <div className="w-full md:w-2/3">
+//             <Table className="bg-white shadow-md rounded-lg">
 //               <TableCaption>Your selected team members</TableCaption>
 //               <TableHeader>
 //                 <TableRow>
@@ -37,30 +41,52 @@
 //                 </TableRow>
 //               </TableHeader>
 //               <TableBody>
-//                 {user.cartItems.map((member) => (
-//                   <TableRow key={member._id}>
-//                     <TableCell className="font-medium">{member.name}</TableCell>
-//                     <TableCell>{member.email}</TableCell>
-//                     <TableCell>{member.domain}</TableCell>
-//                     <TableCell className="text-center">
-//                       <Button
-//                         variant="outline"
-//                         size="sm"
-//                         onClick={() => handleDelete(member._id)}
-//                         className="flex items-center justify-center space-x-1"
-//                       >
-//                         <Trash className="w-4 h-4" />
-//                         <span>Delete</span>
-//                       </Button>
+//                 {user.cartItems.length > 0 ? (
+//                   user.cartItems.map((member) => (
+//                     <TableRow key={member._id} className="hover:bg-gray-50">
+//                       <TableCell className="font-medium">
+//                         {member.name}
+//                       </TableCell>
+//                       <TableCell>{member.email}</TableCell>
+//                       <TableCell>{member.domain}</TableCell>
+//                       <TableCell className="text-center">
+//                         <Button
+//                           variant="outline"
+//                           size="sm"
+//                           onClick={() => handleDelete(member._id)}
+//                           className="flex items-center justify-center space-x-1"
+//                         >
+//                           <Trash className="w-4 h-4" />
+//                           <span>Delete</span>
+//                         </Button>
+//                       </TableCell>
+//                     </TableRow>
+//                   ))
+//                 ) : (
+//                   <TableRow>
+//                     <TableCell colSpan={4} className="text-center py-4">
+//                       No members in the cart
 //                     </TableCell>
 //                   </TableRow>
-//                 ))}
+//                 )}
 //               </TableBody>
 //             </Table>
+//             {user.cartItems.length > 0 && (
+//               <div className="flex justify-end mt-4">
+//                 <Button
+//                   variant="destructive"
+//                   onClick={handleClearCart}
+//                   className="flex items-center space-x-2"
+//                 >
+//                   <XCircle className="w-5 h-5" />
+//                   <span>Clear Cart</span>
+//                 </Button>
+//               </div>
+//             )}
 //           </div>
 
-//           <div className="w-full">
-//            <TeamCartForm/>
+//           <div className="w-full md:w-1/3">
+//             <TeamCartForm users={user.cartItems} />
 //           </div>
 //         </div>
 //       </div>
@@ -70,9 +96,7 @@
 
 // export default TeamCart;
 
-
-
-
+import { useAppDispatch, useAppSelector } from "@/redux/hokks";
 import { removeFromCart, clearCart } from "@/redux/features/user/userSlice";
 import {
   Table,
@@ -86,11 +110,15 @@ import {
 import { Button } from "@/components/ui/button";
 import { Trash, XCircle } from "lucide-react";
 import TeamCartForm from "@/form/TeamCartForm";
-import { useAppDispatch, useAppSelector } from "@/redux/hokks";
+import { Link, useNavigate } from "react-router-dom";
+import { IUser } from "@/types/user";
+import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 
 const TeamCart = () => {
   const user = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleDelete = (id: string) => {
     dispatch(removeFromCart({ _id: id }));
@@ -100,68 +128,109 @@ const TeamCart = () => {
     dispatch(clearCart());
   };
 
+  const handleGoToUsers = () => {
+    navigate("/users"); // Adjust the route as needed
+  };
+
+  // Transform CartItem to IUser
+  const cartItemsAsUsers: IUser[] = user.cartItems.map((item) => ({
+    _id: item._id,
+    name: item.name,
+    email: item.email,
+    domain: item.domain,
+    gender: item.gender,
+    availability: item.availability,
+    avatar: item.avatar,
+    isDeleted: item.isDeleted,
+    createdAt: item.createdAt,
+    updatedAt: item.updatedAt,
+    userQuantity: item.userQuantity,
+  }));
+
   return (
     <div className="w-full p-20">
       <div className="container mx-auto">
         <div className="flex flex-col md:flex-row items-center gap-6">
           <div className="w-full md:w-2/3">
-            <Table className="bg-white shadow-md rounded-lg">
-              <TableCaption>Your selected team members</TableCaption>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-1/4">Name</TableHead>
-                  <TableHead className="w-1/4">Email</TableHead>
-                  <TableHead className="w-1/4">Domain</TableHead>
-                  <TableHead className="w-1/4 text-center">Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {user.cartItems.length > 0 ? (
-                  user.cartItems.map((member) => (
-                    <TableRow key={member._id} className="hover:bg-gray-50">
-                      <TableCell className="font-medium">
-                        {member.name}
-                      </TableCell>
-                      <TableCell>{member.email}</TableCell>
-                      <TableCell>{member.domain}</TableCell>
-                      <TableCell className="text-center">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleDelete(member._id)}
-                          className="flex items-center justify-center space-x-1"
-                        >
-                          <Trash className="w-4 h-4" />
-                          <span>Delete</span>
-                        </Button>
-                      </TableCell>
+            {user.cartItems.length > 0 ? (
+              <>
+                <Table className="bg-white shadow-md rounded-lg">
+                  <TableCaption>Your selected team members</TableCaption>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="w-1/4">Name</TableHead>
+                      <TableHead className="w-1/4">Email</TableHead>
+                      <TableHead className="w-1/4">Domain</TableHead>
+                      <TableHead className="w-1/4 text-center">
+                        Actions
+                      </TableHead>
                     </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={4} className="text-center py-4">
-                      No members in the cart
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-            {user.cartItems.length > 0 && (
-              <div className="flex justify-end mt-4">
-                <Button
-                  variant="destructive"
-                  onClick={handleClearCart}
-                  className="flex items-center space-x-2"
+                  </TableHeader>
+                  <TableBody>
+                    {user.cartItems.map((member) => (
+                      <TableRow key={member._id} className="hover:bg-gray-50">
+                        <TableCell className="font-medium">
+                          {member.name}
+                        </TableCell>
+                        <TableCell>{member.email}</TableCell>
+                        <TableCell>{member.domain}</TableCell>
+                        <TableCell className="text-center">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleDelete(member._id)}
+                            className="flex items-center justify-center space-x-1"
+                          >
+                            <Trash className="w-4 h-4" />
+                            <span>Delete</span>
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+                <div className="flex justify-end mt-4">
+                  <Button
+                    variant="destructive"
+                    onClick={handleClearCart}
+                    className="flex items-center space-x-2"
+                  >
+                    <XCircle className="w-5 h-5" />
+                    <span>Clear Cart</span>
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <div className="flex justify-center items-center mx-auto lg:ml-64 ">
+                <Card
+                  className={cn(
+                    "flex flex-col items-center justify-center text-center p-4  md:p-10 max-w-lg w-full"
+                  )}
                 >
-                  <XCircle className="w-5 h-5" />
-                  <span>Clear Cart</span>
-                </Button>
+                  <h2 className="text-xl font-semibold mb-4">
+                    Your cart is empty
+                  </h2>
+                  <p className="text-gray-600 mb-6">
+                    It looks like you haven't selected any team members yet. You
+                    can add members to your cart to create a team.
+                  </p>
+                  <Link to="/">
+                    <Button
+                      onClick={handleGoToUsers}
+                      className="flex items-center space-x-2"
+                    >
+                      <span>Go to Users</span>
+                    </Button>
+                  </Link>
+                </Card>
               </div>
             )}
           </div>
 
           <div className="w-full md:w-1/3">
-            <TeamCartForm users={user.cartItems} />
+            {user.cartItems.length > 0 && (
+              <TeamCartForm users={cartItemsAsUsers} />
+            )}
           </div>
         </div>
       </div>
@@ -170,4 +239,3 @@ const TeamCart = () => {
 };
 
 export default TeamCart;
-
