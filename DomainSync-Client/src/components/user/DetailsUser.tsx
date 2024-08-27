@@ -1,40 +1,66 @@
 import { Card } from "@/components/ui/card";
-import { IUser } from "@/types/user";
+import { cn } from "@/lib/utils";
+import { useGetSingleUserQuery } from "@/redux/features/user/userApi";
+import { Loader } from "lucide-react";
+import { useParams } from "react-router-dom";
 
-const UserDetails = ({ user }: { user: IUser }) => {
+const UserDetails = () => {
+  const { id } = useParams();
+  const { data, isLoading, isError } = useGetSingleUserQuery(id);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <Loader className="animate-spin w-8 h-8 text-primary" />
+      </div>
+    );
+  }
+
+  if (isError || !data?.data) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-red-500">Failed to load user details.</p>
+      </div>
+    );
+  }
+
+  const { name, email, gender, domain, avatar } = data.data;
+
   return (
-    <Card className="p-4 shadow-lg rounded-lg">
-      <div className="relative w-full overflow-hidden group rounded-lg">
-        <img
-          className="object-cover object-center transition-transform duration-500 ease-in-out transform group-hover:scale-110"
-          src={user.avatar}
-          alt="Product Image"
-          width={500}
-          height={300}
-        />
-
-        {/* Product Tag */}
-        <div className="absolute top-2 right-2 bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">
-          New Arrival
+    <main className="flex items-center justify-center p-10 mx-auto max-h-screen">
+      <Card
+        className={cn(
+          "flex flex-col md:flex-row h-full max-h-[40rem] w-full max-w-[64rem] overflow-hidden shadow-lg"
+        )}
+      >
+        <div className="w-full p-6 md:w-1/2 flex flex-col justify-center space-y-6">
+          <h1 className="text-center text-3xl font-bold text-primary">
+            User Details
+          </h1>
+          <div className="space-y-4 text-lg">
+            <p>
+              <span className="font-semibold">Name:</span> {name || "N/A"}
+            </p>
+            <p>
+              <span className="font-semibold">Email:</span> {email || "N/A"}
+            </p>
+            <p>
+              <span className="font-semibold">Gender:</span> {gender || "N/A"}
+            </p>
+            <p>
+              <span className="font-semibold">Domain:</span> {domain || "N/A"}
+            </p>
+          </div>
         </div>
-      </div>
-
-      <div className="mt-4">
-        <h2 className="text-lg font-medium text-gray-900 capitalize">
-          {user.name}
-        </h2>
-        <h2 className="text-lg font-medium text-gray-900 capitalize">
-          {user.email}
-        </h2>
-        <p className="text-sm text-gray-500 mt-1">{user.gender}</p>
-
-        <div className="flex items-center mt-3">
-          <p className="ml-2 text-base font-medium text-gray-500 line-through dark:text-gray-300">
-            ${user.domain}
-          </p>
+        <div className="md:w-1/2">
+          <img
+            src={avatar || "/placeholder-image.jpg"}
+            alt={name || "User Avatar"}
+            className="w-full h-full object-cover object-center"
+          />
         </div>
-      </div>
-    </Card>
+      </Card>
+    </main>
   );
 };
 

@@ -2,6 +2,7 @@ import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import { TQueryParam } from "@/types/global.type";
 import { useState, useEffect } from "react";
 import UserCard from "./UserCard";
+import Loader from "../shared/Loader/Loader";
 
 const User = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -17,7 +18,7 @@ const User = () => {
 
   // Handle potential errors and loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader/>
   }
 
   if (isError) {
@@ -29,13 +30,15 @@ const User = () => {
   }
 
   return (
-    <div>
+    <div className="w-full">
       {/* Add filters and other UI elements here */}
-      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {data.data.result.map((user) => (
-          <UserCard key={user._id} user={user} />
-        ))}
-      </div>
+     <div className="container mx-auto pt-10">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          {data.data.result.map((user) => (
+            <UserCard key={user._id} user={user} />
+          ))}
+        </div>
+     </div>
     </div>
   );
 };
