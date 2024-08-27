@@ -1,19 +1,18 @@
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { useGetSingleUserQuery } from "@/redux/features/user/userApi";
-import { Loader } from "lucide-react";
+
 import { useParams } from "react-router-dom";
+import Loader from "../shared/Loader/Loader";
 
 const UserDetails = () => {
   const { id } = useParams();
   const { data, isLoading, isError } = useGetSingleUserQuery(id);
 
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <Loader className="animate-spin w-8 h-8 text-primary" />
-      </div>
-    );
+    return <Loader/>
+      
+    
   }
 
   if (isError || !data?.data) {

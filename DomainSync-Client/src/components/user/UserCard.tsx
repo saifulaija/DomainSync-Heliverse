@@ -116,7 +116,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../ui/tooltip";
-import MyDialog from "@/components/shadcn/MyDialog";
+
 import { cn } from "@/lib/utils";
 import { IUser } from "@/types/user";
 import { Separator } from "@radix-ui/react-select";
@@ -138,7 +138,7 @@ const UserCard = ({ user }: { user: IUser }) => {
     <Card
       onClick={handleDetails}
       className={cn(
-        "hover:shadow-lg hover:shadow-slate-400 max-w-md w-full hover:cursor-pointer transition duration-300"
+        "max-w-md w-full hover:cursor-pointer transition duration-300 hover:border hover:border-primary/50"
       )}
     >
       <CardHeader className="p-0 items-center">
