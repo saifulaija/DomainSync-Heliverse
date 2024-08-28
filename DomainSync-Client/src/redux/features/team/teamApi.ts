@@ -1,4 +1,4 @@
-import { TQueryParam, TResponseRedux } from "@/types/global.type";
+import { TQueryParam } from "@/types/global.type";
 
 import { baseApi } from "../../api/baseApi";
 
@@ -24,12 +24,7 @@ const teamApi = baseApi.injectEndpoints({
         };
       },
       providesTags: ["product"],
-      transformResponse: (response: TResponseRedux<TUser[]>) => {
-        return {
-          data: response.data,
-          meta: response.meta,
-        };
-      },
+     
     }),
 
     createTeam: builder.mutation({

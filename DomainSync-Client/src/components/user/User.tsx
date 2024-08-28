@@ -407,7 +407,7 @@ const User = () => {
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {data?.data?.result?.map((user) => (
+            {data?.data?.result?.map((user:any) => (
               <UserCard key={user._id} user={user} />
             ))}
           </div>

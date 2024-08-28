@@ -1,6 +1,6 @@
 
-import { TQueryParam, TResponseRedux } from "@/types/global.type";
-import { TProduct } from "../../../types/product.type";
+import { TQueryParam} from "@/types/global.type";
+
 
 import { baseApi } from "../../api/baseApi";
 
@@ -36,12 +36,12 @@ const productApi = baseApi.injectEndpoints({
         };
       },
       providesTags: ["product"],
-      transformResponse: (response: TResponseRedux<TProduct[]>) => {
-        return {
-          data: response.data,
-          meta: response.meta,
-        };
-      },
+      // transformResponse: (response: TResponseRedux<TProduct[]>) => {
+      //   return {
+      //     data: response.data,
+      //     meta: response.meta,
+      //   };
+      // },
     }),
 
  

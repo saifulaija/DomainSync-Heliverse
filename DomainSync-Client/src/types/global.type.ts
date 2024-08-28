@@ -16,22 +16,6 @@ export type TMeta = {
   totalPage: number;
 };
 
-// export type TResponse<T> = {
-//   data?: T;
-//   error?: TError;
-//   meta?: TMeta;
-//   success: boolean;
-//   message: string;
-// };
-// export type TResponse<T> = {
-//   data?: {
-//     result: T; // Update this to match your API response
-//   };
-//   error?: TError;
-//   meta?: TMeta;
-//   success: boolean;
-//   message: string;
-// };
 
 export type TResponse<T> = {
   data?: {

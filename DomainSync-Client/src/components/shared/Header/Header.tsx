@@ -21,7 +21,7 @@ const Header = () => {
   const [searchValue, setSearchValue] = useState("");
   const user = useAppSelector((state) => state.user);
 
-  const searchRef = useRef(null);
+  const searchRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,26 +34,29 @@ const Header = () => {
   }, []);
 
   const handleSearch = useCallback(
-    (value) => {
+    (value:any) => {
       navigate(`/?q=${encodeURIComponent(value)}`);
     },
     [navigate]
   );
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e:any) => {
     setSearchValue(e.target.value);
     handleSearch(e.target.value);
   };
 
-  const handleClearSearch = () => {
-    setSearchValue("");
+const handleClearSearch = () => {
+  setSearchValue("");
+  if (searchRef.current) {
     searchRef.current.focus(); // Focus back to the search input
-    navigate("/"); // Navigate back to the default page
-  };
+  }
+  navigate("/"); // Navigate back to the default page
+};
+
 
   const menuItems = [
     { label: "Home", path: "/", show: true },
-    { label: "Users", path: "/users", show: true },
+    { label: "Users", path: "/all-users", show: true },
   
   ];
 

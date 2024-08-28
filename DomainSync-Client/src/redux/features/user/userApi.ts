@@ -1,7 +1,7 @@
-import { TQueryParam, TResponseRedux } from "@/types/global.type";
+import { TQueryParam, TResponseRedux, TUser } from "@/types/global.type";
 
 import { baseApi } from "../../api/baseApi";
-import { TUser } from "@/types/user";
+// import { TUser } from "@/types/user";
 
 const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -36,7 +36,7 @@ const userApi = baseApi.injectEndpoints({
       transformResponse: (response: TResponseRedux<TUser[]>) => {
         return {
           data: response.data,
-          meta: response.meta,
+         
         };
       },
     }),
