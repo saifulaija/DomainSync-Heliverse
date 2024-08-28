@@ -23,12 +23,22 @@ export type TMeta = {
 //   success: boolean;
 //   message: string;
 // };
+// export type TResponse<T> = {
+//   data?: {
+//     result: T; // Update this to match your API response
+//   };
+//   error?: TError;
+//   meta?: TMeta;
+//   success: boolean;
+//   message: string;
+// };
+
 export type TResponse<T> = {
   data?: {
-    result: T; // Update this to match your API response
+    result: T; // The type of the actual data, e.g., TUser[] for an array of users
+    meta?: TMeta; // Ensure meta is defined here
   };
   error?: TError;
-  meta?: TMeta;
   success: boolean;
   message: string;
 };
