@@ -34,7 +34,7 @@ const userApi = baseApi.injectEndpoints({
           params: params,
         };
       },
-      providesTags: ["product"],
+      providesTags: ["user"],
       transformResponse: (response: TResponseRedux<TUser[]>) => {
         return {
           data: response.data,
@@ -64,7 +64,7 @@ const userApi = baseApi.injectEndpoints({
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `/users/${id}`,
-        method: "PUT",
+        method: "DELETE",
       }),
       invalidatesTags: ["user"],
     }),

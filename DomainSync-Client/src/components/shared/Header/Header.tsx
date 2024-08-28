@@ -165,12 +165,13 @@ import { Button } from "@/components/ui/button";
 import assets from "@/assets";
 import { motion } from "framer-motion";
 import { Link, NavLink } from "react-router-dom";
-import AuthDropdown from "./AuthButton/AuthButton";
+import AuthDropdown from "./AddUserButton/AddUserButton";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { UserPlus, Users } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useAppSelector } from "@/redux/hokks";
+import AddUserButton from "./AddUserButton/AddUserButton";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -342,7 +343,7 @@ const Header = () => {
               </Badge>
             </Link>
 
-            <AuthDropdown />
+           <AddUserButton/>
           </div>
         </header>
       </div>

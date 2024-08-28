@@ -70,11 +70,11 @@ const AddUserForm = () => {
       const res = await createUser(values).unwrap();
 
       if (res?.data) {
-        toast.success("user added successfully");
+        toast.success("user added successfully",{position:'bottom-left'});
         navigate("/");
       }
     } catch (err: any) {
-      toast.error(err?.message);
+      toast.error(err?.message, { position: "bottom-left" });
     }
   };
   return (
