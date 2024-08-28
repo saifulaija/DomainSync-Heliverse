@@ -1,6 +1,5 @@
 import { TQueryParam, TResponseRedux } from "@/types/global.type";
 
-
 import { baseApi } from "../../api/baseApi";
 import { TUser } from "@/types/user";
 
@@ -8,11 +7,10 @@ const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     updateUser: builder.mutation({
       query: (options) => {
-        console.log({ options });
         return {
-          url: `/users/${options.productId}`,
+          url: `/users/${options?.userId}`,
           method: "PUT",
-          body: options.data,
+          body: options?.data,
         };
       },
       invalidatesTags: ["user"],
@@ -61,6 +59,18 @@ const userApi = baseApi.injectEndpoints({
       },
     }),
 
+    // updateUser: builder.mutation({
+    //   query: (options) => {
+    //     console.log({ options });
+    //     return {
+    //       url: `/products/update-product/${options.productId}`,
+    //       method: "PATCH",
+    //       body: options.data,
+    //     };
+    //   },
+    //   invalidatesTags: ["product"],
+    // }),
+
     deleteUser: builder.mutation({
       query: (id) => ({
         url: `/users/${id}`,
@@ -78,14 +88,14 @@ const userApi = baseApi.injectEndpoints({
       },
       providesTags: ["user"],
     }),
-   
   }),
 });
 
 export const {
-useCreateUserMutation,
-useDeleteUserMutation,
-useGetAllUsersByCategoryQuery,
-useGetAllUsersQuery,
-useGetSingleUserQuery
+  useCreateUserMutation,
+  useDeleteUserMutation,
+  useGetAllUsersByCategoryQuery,
+  useGetAllUsersQuery,
+  useGetSingleUserQuery,
+  useUpdateUserMutation,
 } = userApi;

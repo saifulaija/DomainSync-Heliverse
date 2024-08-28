@@ -14,13 +14,14 @@ const createTeam = catchAsync(async (req, res) => {
     data: result,
   });
 });
-const getAllTeams = catchAsync(async (req, res) => {
-  const result = await teamServices.getAllTeams;
+const getSingleTeam = catchAsync(async (req, res) => {
+  const{id}=req.params
+  const result = await teamServices.getSingleTeam(id);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Teams are fetched successfully',
+    message: 'Team are fetched successfully',
     data: result,
   });
 });
@@ -28,7 +29,7 @@ const getAllTeams = catchAsync(async (req, res) => {
 
 export const teamControllers = {
     createTeam,
-    getAllTeams,
+    getSingleTeam,
 
 
 };

@@ -7,6 +7,7 @@ import AddUser from "@/page/AddUser/AddUser";
 import Home from "@/page/Home/Home";
 import ShowTeam from "@/page/ShowTeam/ShowTeam";
 import TeamCart from "@/page/TeamCart/TeamCart";
+import UpdateUser from "@/page/UpdateUser/UpdateUser";
 
 import { createBrowserRouter } from "react-router-dom";
 
@@ -38,6 +39,12 @@ const router = createBrowserRouter([
       {
         path: "/user/details/:id",
         element: <UserDetails />,
+        loader: ({ params }) =>
+          fetch(` http://localhost:5000/api/users/${params.id}`),
+      },
+      {
+        path: "/user/edit/:id",
+        element: <UpdateUser />,
         loader: ({ params }) =>
           fetch(` http://localhost:5000/api/users/${params.id}`),
       },

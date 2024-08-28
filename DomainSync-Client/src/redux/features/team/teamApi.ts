@@ -58,10 +58,10 @@ const teamApi = baseApi.injectEndpoints({
       invalidatesTags: ["team"],
     }),
 
-    getSingleUser: builder.query({
+    getSingleTeam: builder.query({
       query: (teamId) => {
         return {
-          url: `/teams/${teamId}`,
+          url: `/team/${teamId}`,
           method: "Get",
         };
       },
@@ -75,5 +75,5 @@ export const {
   useDeleteUserMutation,
   useGetAllUsersByCategoryQuery,
   useGetAllUsersQuery,
-  useGetSingleUserQuery,
+  useGetSingleTeamQuery,
 } = teamApi;

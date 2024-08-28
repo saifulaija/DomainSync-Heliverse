@@ -175,7 +175,7 @@ const UserCard = ({ user }: { user: IUser }) => {
     setTimeout(() => {
       try {
         dispatch(addToCart(user));
-        toast.success("User added to cart successfully");
+       
       } catch (error) {
         console.error("Failed to add user to cart:", error);
       } finally {
@@ -245,8 +245,8 @@ const UserCard = ({ user }: { user: IUser }) => {
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
-                  to={`/user/update/${user._id}`}
-                  className="text-primary hover:text-blue-800"
+                  to={`/user/edit/${user._id}`}
+                  className="text-primary"
                   onClick={(e) => e.stopPropagation()}
                 >
                   <Edit className="w-5 h-5" />

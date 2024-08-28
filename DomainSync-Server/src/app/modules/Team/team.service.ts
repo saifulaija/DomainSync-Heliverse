@@ -16,8 +16,8 @@ const createTeam = async (payload: ITeam) => {
  return result
 };
 
-const getAllTeams = async () => {
-  const result = await Team.find();
+const getSingleTeam = async (id: string) => {
+  const result = await Team.findById(id).populate('users.userId');
   return result;
 };
 
@@ -25,7 +25,9 @@ const getAllTeams = async () => {
 
 
 
+
 export const teamServices = {
 createTeam,
-getAllTeams
+getSingleTeam,
+
 };
