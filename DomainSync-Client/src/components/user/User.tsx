@@ -3,6 +3,7 @@ import { TQueryParam } from "@/types/global.type";
 import { useState, useEffect } from "react";
 import UserCard from "./UserCard";
 import Loader from "../shared/Loader/Loader";
+import { useLocation } from "react-router-dom";
 
 const User = () => {
   const [params, setParams] = useState<TQueryParam[]>([]);
@@ -11,6 +12,17 @@ const User = () => {
   const [selectedSubCategory, setSelectedSubCategory] = useState("");
   const [selectedSort, setSelectedSort] = useState("");
 
+  const location = useLocation();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const searchQuery = searchParams.get("q");
+
+    if (searchQuery) {
+      setParams([{ name: "searchTerm", value: searchQuery }]);
+    }
+  }, [location.search]);
+
   const { data, isLoading, isError } = useGetAllUsersQuery([
     { name: "page", value: page },
     ...params,
@@ -18,7 +30,7 @@ const User = () => {
 
   // Handle potential errors and loading state
   if (isLoading) {
-    return <Loader/>
+    return <Loader />;
   }
 
   if (isError) {
@@ -32,13 +44,13 @@ const User = () => {
   return (
     <div className="w-full">
       {/* Add filters and other UI elements here */}
-     <div className="container mx-auto pt-10">
+      <div className="container mx-auto pt-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
           {data.data.result.map((user) => (
             <UserCard key={user._id} user={user} />
           ))}
         </div>
-     </div>
+      </div>
     </div>
   );
 };
