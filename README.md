@@ -1,10 +1,10 @@
-# User Management Application
+# DomainSync User Management Application
 
 This project is a User Management Application that allows users to search, filter, and manage a list of users. The frontend is designed to be responsive and visually appealing, while the backend provides CRUD API operations for managing user data, including filtering, searching, and pagination.
 
 ## Live URL
 
-[Heliverse Assignment ](https://heliverse-assesment.vercel.app)
+[Heliverse Assignment ](https://domainsync.vercel.app/)
 ## Table of Contents
 
 - [Features](#features)
@@ -44,7 +44,7 @@ This project is a User Management Application that allows users to search, filte
 - *Frontend:*
   - React
   - Tailwind CSS
-  - React Paginate
+  - Shadcn ui
 
 - *Backend:*
   - Node.js
@@ -105,7 +105,7 @@ This project is a User Management Application that allows users to search, filte
 
 1. *Clone the repository:*
    bash
-   git clone [[[https://github.com/yourusername/ecommerce-data-visualization.git](https://github.com/developerMasum/Heliverse-Assesment)](https://github.com/developerMasum/Heliverse-Assesment)]([https://github.com/developerMasum/RapidQuest-Task](https://github.com/developerMasum/Heliverse-Assesment))
+   git clone [[[https://github.com/yourusername/ecommerce-data-visualization.git](https://https://github.com/saifulaija/DomainSync-Heliverse)](https://github.com/saifulaija/DomainSync-Heliverse)]
   
 
 bash
@@ -134,5 +134,5 @@ bash
 
 
 ## 🔗 Visit My Profile Links
-[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://portfolio-masum-fullstack.vercel.app)
-[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/mdmasumdev)
+[![portfolio](https://img.shields.io/badge/my_portfolio-000?style=for-the-badge&logo=ko-fi&logoColor=white)](https://saifulislam-portfolio-pro.vercel.app/)
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/reactjs-developer/)
