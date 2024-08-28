@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 
-import { Product } from '../products/product.model';
+
 import { ITeam } from './team.interface';
 import { Team } from './team.model';
 import AppError from '../../errors/AppError';

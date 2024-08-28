@@ -1,12 +1,6 @@
 import { Router } from 'express';
-
-import { AuthRoutes } from '../modules/Auth/auth.route';
-
 import { UserRoutes } from '../modules/User/user.route';
-import { ProductsRoutes } from '../modules/products/product.route';
-import { orderRoute } from '../modules/order/order.route';
-import { reviewRoutes } from '../modules/review/review.route';
-import { chartRoutes } from '../modules/chartData/chart.route';
+
 import { teamRoutes } from '../modules/Team/team.route';
 
 const router = Router();
@@ -19,28 +13,6 @@ const moduleRoutes = [
   {
     path: '/team',
     route: teamRoutes,
-  },
-
-  {
-    path: '/auth',
-    route: AuthRoutes,
-  },
-
-  {
-    path: '/products',
-    route: ProductsRoutes,
-  },
-  {
-    path: '/orders',
-    route: orderRoute,
-  },
-  {
-    path: '/reviews',
-    route: reviewRoutes,
-  },
-  {
-    path: '/chart',
-    route: chartRoutes,
   },
 ];
 
